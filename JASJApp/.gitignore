@@ -1,0 +1,6 @@
+/target/
+
+src/main/resources/JASJApp/node_modules
+src/main/resources/JASJApp/dist
+src/main/resources/JASJApp/.angular
+src/main/resources/JASJApp/.vscode
