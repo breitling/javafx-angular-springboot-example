@@ -22,7 +22,7 @@ public class FxApp extends Application
 	@SuppressWarnings("unused")
 	private static final Logger LOG = LoggerFactory.getLogger(FxApp.class);
 
-//	private JSObject javascriptConnector;
+	private JSObject javascriptConnector;
 	private JavaConnector javaConnector = new JavaConnector();
 
 	public static void main(String... args) {
@@ -32,17 +32,19 @@ public class FxApp extends Application
 	@Override
 	public void start(Stage primaryStage) 
 	{
-		primaryStage.setTitle("JASJ");
+		primaryStage.setTitle("JAS");
 
 		Browser b = new Browser();
-		Scene scene = new Scene(b, 980, 660, Color.web("#666970"));
+		Scene scene = new Scene(b, 880, 660, Color.web("#666970"));
 
 		b.webEngine.getLoadWorker().stateProperty().addListener((observable, oldValue, newValue) -> {
 			if (Worker.State.SUCCEEDED == newValue) {
 				JSObject window = (JSObject) b.webEngine.executeScript("window");
 				window.setMember("javaConnector", javaConnector);
-//				javascriptConnector = (JSObject) b.webEngine.executeScript("getJsConnector()");
-//				javaConnector.setJavascriptConnector(javascriptConnector);
+				javascriptConnector = (JSObject) b.webEngine.executeScript("getJsConnector()");
+				javaConnector.setJavascriptConnector(javascriptConnector);
+			//  SETUP JAVASCRIPT CONSOLE TO SYSTEM.OUT
+	 			b.webEngine.executeScript("console.log = function(message) { javaConnector.log(message); };");
 			}
 		});
 
@@ -64,13 +66,6 @@ public class FxApp extends Application
 			getStyleClass().add("browser");
 			webEngine.load(url);
 			getChildren().add(browser);
-// TODO?
-//			WebConsoleListener.setDefaultListener((webView, message, lineNumber, sourceId) -> {
-//				if (message instanceof String) {
-//					Timestamp t = new Timestamp(new Date().getTime());
-//					System.out.println(t.toString().substring(11) + " [JS Console Log] DEBUG - " + message + "[at " + lineNumber + "]");
-//				}
-//			});
 		}
 
 		@Override 
@@ -83,7 +78,7 @@ public class FxApp extends Application
 
 		@Override 
 		protected double computePrefWidth(double height) {
-			return 450;
+			return 600;
 		}
 
 		@Override 

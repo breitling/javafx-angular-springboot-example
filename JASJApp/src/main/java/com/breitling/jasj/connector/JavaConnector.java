@@ -21,14 +21,30 @@ public class JavaConnector
         this.javascriptConnector = conn;
     }
     
+    public String getUsers()
+    {
+    	return "Fred,Stan,Rodney,Chris";
+    }
+    
     public void exit(int value) 
     {
         LOG.debug("Exiting - exit code = {}", value);
         System.exit(value);
     }
     
-    public void logIt(String json)
+    public void logIt(String... parts)
     {
-        LOG.debug("LOG: {}", json);
+    	StringBuilder sb = new StringBuilder();
+    	
+    	for (String p : parts)
+    		sb.append(p).append(" ");
+    	
+        LOG.debug("LOG: {}", sb.toString());
+    }
+    
+    public void log(String message) 
+    {
+    	System.out.print("CONSOLE.LOG: ");
+    	System.out.println(message);
     }
 }
