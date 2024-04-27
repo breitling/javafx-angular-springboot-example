@@ -23,7 +23,7 @@ public class RestfulController
 	List<String> list = new ArrayList<String>(Arrays.asList("Bob","Billy","Gale","Jo"));
 	
 	@GetMapping(value = "/users", produces = { "application/json" })
-	public ResponseEntity<List<String>> issuesGet()
+	public ResponseEntity<List<String>> usersGet()
 	{
 		list.add(list.get(new Random().nextInt(4)));
 		
