@@ -7,5 +7,7 @@ This project uses Eclipse for the JavaFX/Spring-Boot pieces. Visual Studio Code 
 # Eclipse
 I use Maven for dependency management. Run the JavaFX piece by right clicking onf JasjApplication.java and "Run as a Java Application".
 
+![App looks like this](/jas.png)
+
 Bob Breitling
 
